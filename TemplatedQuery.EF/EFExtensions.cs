@@ -172,6 +172,27 @@ namespace NeuroSpeech.TemplatedQuery
             = new ConcurrentDictionary<string, PropertyInfo>();
 
         public static async Task<List<T>> FromSql<T>(
+            this ObjectContext db, 
+            TemplateQuery[] queries, 
+            bool ignoreUnmatchedProperties = false)
+            where T:class
+        {
+            if (queries == null || queries.Length == 0)
+                throw new ArgumentException($"No query specified");
+            TemplateQuery q = null;
+            for (int i = 0; i < queries.Length; i++)
+            {
+                q = queries[i];
+                if (i == queries.Length -1 )
+                {
+                    break;
+                }
+                await db.ExecuteNonQueryAsync(q);
+            }
+            return await db.FromSql<T>(q, ignoreUnmatchedProperties);
+        }
+
+        public static async Task<List<T>> FromSql<T>(
             this ObjectContext db,
             TemplateQuery query,
             bool ignoreUnmatchedProperties = false)
