@@ -167,7 +167,7 @@ namespace NeuroSpeech.TemplatedQuery
                 return this.fragments
                     .Where(x => x.hasArgument)
                     .Select(x => new KeyValuePair<string, object>(
-                        $"@p{ix++}",
+                        $"p{ix++}",
                         x.argument))
                     .ToArray();
             }
