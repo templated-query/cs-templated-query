@@ -293,6 +293,48 @@ namespace NeuroSpeech.TemplatedQuery
         private static ConcurrentDictionary<string, PropertyInfo> propertyCache
             = new ConcurrentDictionary<string, PropertyInfo>();
 
+        public static List<T> FromSql<T>(
+            this DbContext db,
+            TemplateQuery[] queries,
+            bool ignoreUnmatchedProperties = false)
+            where T : class
+        {
+            if (queries == null || queries.Length == 0)
+                throw new ArgumentException($"No query specified");
+            TemplateQuery q = (FormattableString)$"";
+            for (int i = 0; i < queries.Length; i++)
+            {
+                q = queries[i];
+                if (i == queries.Length - 1)
+                {
+                    break;
+                }
+                db.ExecuteNonQuery(q);
+            }
+            return db.FromSql<T>(q, ignoreUnmatchedProperties);
+        }
+
+        public static async Task<List<T>> FromSqlAsync<T>(
+            this DbContext db,
+            TemplateQuery[] queries,
+            bool ignoreUnmatchedProperties = false)
+            where T : class
+        {
+            if (queries == null || queries.Length == 0)
+                throw new ArgumentException($"No query specified");
+            TemplateQuery q = (FormattableString)$"";
+            for (int i = 0; i < queries.Length; i++)
+            {
+                q = queries[i];
+                if (i == queries.Length - 1)
+                {
+                    break;
+                }
+                await db.ExecuteNonQueryAsync(q);
+            }
+            return await db.FromSqlAsync<T>(q, ignoreUnmatchedProperties);
+        }
+
         public static async Task<List<T>> FromSqlAsync<T>(
             this DbContext db,
             TemplateQuery query,

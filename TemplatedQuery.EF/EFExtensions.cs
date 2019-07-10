@@ -288,7 +288,7 @@ namespace NeuroSpeech.TemplatedQuery
         {
             if (queries == null || queries.Length == 0)
                 throw new ArgumentException($"No query specified");
-            TemplateQuery q = null;
+            TemplateQuery q = (FormattableString)$"";
             for (int i = 0; i < queries.Length; i++)
             {
                 q = queries[i];
@@ -299,6 +299,27 @@ namespace NeuroSpeech.TemplatedQuery
                 db.ExecuteNonQuery(q);
             }
             return db.FromSql<T>(q, ignoreUnmatchedProperties);
+        }
+
+        public static async Task<List<T>> FromSqlAsync<T>(
+            this ObjectContext db,
+            TemplateQuery[] queries,
+            bool ignoreUnmatchedProperties = false)
+            where T : class
+        {
+            if (queries == null || queries.Length == 0)
+                throw new ArgumentException($"No query specified");
+            TemplateQuery q = (FormattableString)$"";
+            for (int i = 0; i < queries.Length; i++)
+            {
+                q = queries[i];
+                if (i == queries.Length - 1)
+                {
+                    break;
+                }
+                await db.ExecuteNonQueryAsync(q);
+            }
+            return await db.FromSqlAsync<T>(q, ignoreUnmatchedProperties);
         }
 
         public static List<T> FromSql<T>(
@@ -364,27 +385,6 @@ namespace NeuroSpeech.TemplatedQuery
                 }
                 return list;
             }
-        }
-
-        public static async Task<List<T>> FromSqlAsync<T>(
-            this ObjectContext db,
-            TemplateQuery[] queries,
-            bool ignoreUnmatchedProperties = false)
-            where T : class
-        {
-            if (queries == null || queries.Length == 0)
-                throw new ArgumentException($"No query specified");
-            TemplateQuery q = null;
-            for (int i = 0; i < queries.Length; i++)
-            {
-                q = queries[i];
-                if (i == queries.Length - 1)
-                {
-                    break;
-                }
-                await db.ExecuteNonQueryAsync(q);
-            }
-            return await db.FromSqlAsync<T>(q, ignoreUnmatchedProperties);
         }
 
         public static async Task<List<T>> FromSqlAsync<T>(
