@@ -68,7 +68,7 @@ namespace NeuroSpeech.TemplatedQuery
             public static DbReader CreateCommand(ObjectContext db, TemplateQuery query)
             {
                 DbReader r = new DbReader();
-                var conn = r.conn = db.Connection;
+                var conn = r.conn = (db.Connection as System.Data.Entity.Core.EntityClient.EntityConnection).StoreConnection ;
                 if (conn.State != ConnectionState.Open)
                 {
                     db.Connection.Open();
