@@ -126,26 +126,26 @@ namespace NeuroSpeech.TemplatedQuery
 
         }
 
-        public static Task<List<T>> FromSqlAsync<T>(this ObjectContext db, string format, params object[] parameters)
-            where T : class
-        {
-            return FromSqlAsync<T>(db, TemplateQuery.FromString(format, parameters));
-        }
+        //internal static Task<List<T>> FromSqlAsync<T>(this ObjectContext db, string format, params object[] parameters)
+        //    where T : class
+        //{
+        //    return FromSqlAsync<T>(db, TemplateQuery.FromString(format, parameters));
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="db"></param>
-        /// <param name="format"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public static JArray FromSqlToJson(
-            this ObjectContext db,
-            string format,
-            params object[] parameters)
-        {
-            return FromSqlToJson(db, TemplateQuery.FromString(format, parameters));
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="db"></param>
+        ///// <param name="format"></param>
+        ///// <param name="parameters"></param>
+        ///// <returns></returns>
+        //internal static JArray FromSqlToJson(
+        //    this ObjectContext db,
+        //    string format,
+        //    params object[] parameters)
+        //{
+        //    return FromSqlToJson(db, TemplateQuery.FromString(format, parameters));
+        //}
 
 
         /// <summary>
@@ -197,20 +197,20 @@ namespace NeuroSpeech.TemplatedQuery
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="db"></param>
-        /// <param name="format"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public static Task<JArray> FromSqlToJsonAsync(
-            this ObjectContext db,
-            string format,
-            params object[] parameters)
-        {
-            return FromSqlToJsonAsync(db, TemplateQuery.FromString(format, parameters));
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="db"></param>
+        ///// <param name="format"></param>
+        ///// <param name="parameters"></param>
+        ///// <returns></returns>
+        //internal static Task<JArray> FromSqlToJsonAsync(
+        //    this ObjectContext db,
+        //    string format,
+        //    params object[] parameters)
+        //{
+        //    return FromSqlToJsonAsync(db, TemplateQuery.FromString(format, parameters));
+        //}
 
 
         /// <summary>

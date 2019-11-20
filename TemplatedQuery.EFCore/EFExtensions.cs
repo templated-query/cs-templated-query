@@ -134,32 +134,32 @@ namespace NeuroSpeech.TemplatedQuery
 
         }
 
-        public static Task<List<T>> FromSqlAsync<T>(this DbContext db, string format, params object[] parameters)
-            where T : class
-        {
-            return FromSqlAsync<T>(db, TemplateQuery.FromString(format, parameters));
-        }
+        //public static Task<List<T>> FromSqlAsync<T>(this DbContext db, string format, params object[] parameters)
+        //    where T : class
+        //{
+        //    return FromSqlAsync<T>(db, TemplateQuery.FromString(format, parameters));
+        //}
 
-        public static List<T> FromSql<T>(this DbContext db, string format, params object[] parameters)
-    where T : class
-        {
-            return FromSql<T>(db, TemplateQuery.FromString(format, parameters));
-        }
+    //    public static List<T> FromSql<T>(this DbContext db, string format, params object[] parameters)
+    //where T : class
+    //    {
+    //        return FromSql<T>(db, TemplateQuery.FromString(format, parameters));
+    //    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="db"></param>
-        /// <param name="format"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public static JArray FromSqlToJson(
-            this DbContext db,
-            string format,
-            params object[] parameters)
-        {
-            return FromSqlToJson(db, TemplateQuery.FromString(format, parameters));
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="db"></param>
+        ///// <param name="format"></param>
+        ///// <param name="parameters"></param>
+        ///// <returns></returns>
+        //public static JArray FromSqlToJson(
+        //    this DbContext db,
+        //    string format,
+        //    params object[] parameters)
+        //{
+        //    return FromSqlToJson(db, TemplateQuery.FromString(format, parameters));
+        //}
 
 
         /// <summary>
@@ -210,20 +210,20 @@ namespace NeuroSpeech.TemplatedQuery
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="db"></param>
-        /// <param name="format"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public static Task<JArray> FromSqlToJsonAsync(
-            this DbContext db,
-            string format,
-            params object[] parameters)
-        {
-            return FromSqlToJsonAsync(db, TemplateQuery.FromString(format, parameters));
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="db"></param>
+        ///// <param name="format"></param>
+        ///// <param name="parameters"></param>
+        ///// <returns></returns>
+        //public static Task<JArray> FromSqlToJsonAsync(
+        //    this DbContext db,
+        //    string format,
+        //    params object[] parameters)
+        //{
+        //    return FromSqlToJsonAsync(db, TemplateQuery.FromString(format, parameters));
+        //}
 
 
         /// <summary>
