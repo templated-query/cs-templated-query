@@ -98,7 +98,7 @@ namespace NeuroSpeech.TemplatedQuery
             public static async Task<DbReader> CreateCommandAsync(ObjectContext db, TemplateQuery query)
             {
                 DbReader r = new DbReader();
-                var conn = r.conn = db.Connection;
+                var conn = r.conn = (db.Connection as System.Data.Entity.Core.EntityClient.EntityConnection).StoreConnection;
                 if (conn.State != ConnectionState.Open)
                 {
                     await db.Connection.OpenAsync();
