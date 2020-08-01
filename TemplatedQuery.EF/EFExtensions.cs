@@ -277,6 +277,22 @@ namespace NeuroSpeech.TemplatedQuery
             }
         }
 
+        public static object ExecuteScalar(this ObjectContext db, TemplateQuery query)
+        {
+            using (var r = DbReader.CreateCommand(db, query))
+            {
+                return r.Command.ExecuteScalarAsync();
+            }
+        }
+
+        public static async Task<object> ExecuteScalarAsync(this ObjectContext db, TemplateQuery query)
+        {
+            using (var r = await DbReader.CreateCommandAsync(db, query))
+            {
+                return await r.Command.ExecuteScalarAsync();
+            }
+        }
+
         private static ConcurrentDictionary<string, PropertyInfo> propertyCache
             = new ConcurrentDictionary<string, PropertyInfo>();
 
