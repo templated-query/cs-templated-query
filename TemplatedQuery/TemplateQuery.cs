@@ -125,6 +125,13 @@ namespace NeuroSpeech.TemplatedQuery
             return new TemplateQuery($"");
         }
 
+        private static object[] Empty = new object[] { };        
+
+        public static TemplateQuery Literal(string text)
+        {
+            return new TemplateQuery(text, Empty);
+        }
+
         public static TemplateQuery New(params FormattableString[] sql)
         {
             if (sql.Length == 0)
