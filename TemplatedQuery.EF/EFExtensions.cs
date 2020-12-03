@@ -281,7 +281,7 @@ namespace NeuroSpeech.TemplatedQuery
         {
             using (var r = DbReader.CreateCommand(db, query))
             {
-                return r.Command.ExecuteScalarAsync();
+                return r.Command.ExecuteScalar();
             }
         }
 
