@@ -10,6 +10,20 @@ using System.Text;
 
 namespace NeuroSpeech.TemplatedQuery
 {
+    public readonly struct Literal
+    {
+        public readonly string value;
+
+        public static Literal DoubleQuoted(string text) => new Literal($"\"{text}\"");
+
+        public static Literal SquareBrackets(string text) => new Literal($"[{text}]");
+
+        public Literal(string value)
+        {
+            this.value = value;
+        }
+    }
+
     public struct TemplateQuery
     {
 
@@ -71,7 +85,10 @@ namespace NeuroSpeech.TemplatedQuery
                 text = text.Substring(index + sep.Length);
                 var arg = args[i];
                 fragments.Add((prefix, false, null));
-                if (arg is TemplateQuery q)
+                if(arg is Literal l)
+                {
+                    fragments.Add((l.value, false, null));
+                } else if (arg is TemplateQuery q)
                 {
                     fragments.AddRange(q.fragments);
                 }
