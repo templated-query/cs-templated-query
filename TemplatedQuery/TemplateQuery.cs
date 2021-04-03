@@ -12,7 +12,7 @@ namespace NeuroSpeech.TemplatedQuery
 {
     public struct Literal
     {
-        public readonly string value;
+        public readonly string Value;
 
         public static Literal DoubleQuoted(string text) => new Literal($"\"{text}\"");
 
@@ -20,7 +20,12 @@ namespace NeuroSpeech.TemplatedQuery
 
         public Literal(string value)
         {
-            this.value = value;
+            this.Value = value;
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -87,7 +92,7 @@ namespace NeuroSpeech.TemplatedQuery
                 fragments.Add((prefix, false, null));
                 if(arg is Literal l)
                 {
-                    fragments.Add((l.value, false, null));
+                    fragments.Add((l.Value, false, null));
                 } else if (arg is TemplateQuery q)
                 {
                     fragments.AddRange(q.fragments);
