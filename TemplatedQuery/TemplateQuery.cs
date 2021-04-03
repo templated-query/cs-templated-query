@@ -10,7 +10,7 @@ using System.Text;
 
 namespace NeuroSpeech.TemplatedQuery
 {
-    public readonly struct Literal
+    public struct Literal
     {
         public readonly string value;
 
